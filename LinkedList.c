@@ -67,7 +67,14 @@ int main(void)
  */
 Node_t *newNode(const char *value, Node_t *next)
 {
-    return NULL;
+    Node *nd = malloc(sizeof(Node));
+    char *val;
+    strcpy(val, value);
+    nd -> value = val;
+    nd -> next = next;
+    if(nd == null){
+        return NULL;
+    }
 }
 
 /**
@@ -77,7 +84,14 @@ Node_t *newNode(const char *value, Node_t *next)
  */
 Node_t *deleteNode(Node_t *current, char **value)
 {
-    return NULL;
+    Node *ptr = current;
+    if((ptr->value == *value)&&(strcmp((ptr->value),*value) == 0)){
+        free(current);
+        return ptr->next;
+    }else{
+        return NULL;
+    }
+    
 }
 
 /**
@@ -88,7 +102,13 @@ Node_t *deleteNode(Node_t *current, char **value)
  */
 bool pop(Node_t **Stack, char **value)
 {
-    return false;
+    if(*Stcak == NULL){
+        return false;
+    }else{
+        Node_t *p = *Stack;
+        p = deleteNode(*Stack, value);
+        return true;
+    }
 }
 
 /**
@@ -97,6 +117,17 @@ bool pop(Node_t **Stack, char **value)
  * return true if everything is successfull
  */
 bool push(Node_t **Stack, const char *value)
-{
-    return false;
+{   
+    if(*Stack == NULL){
+        char *val;
+        strcpy(val, value);
+        *Stack = newNode(val, NULL);
+        return true;
+    }else{
+        char *val;
+        strcpy(val, value);
+        Node_t *p = newNode(val, *Stack);
+        *Stack = p;
+        return true;
+    }
 }
