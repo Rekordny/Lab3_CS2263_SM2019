@@ -1,11 +1,3 @@
-#########################################
-# Created by Jean-Philippe Legault
-#
-# This is a comment, a comment always start with `#`
-# Indentation is primordial in a Makefile.
-# the steps for a target are always indented
-#
-##########################################
 
 # compile with gcc, change this to clang if you prefer
 COMPILER = gcc
@@ -26,11 +18,11 @@ help:
 	@printf "	make compound_test      (to run test cases against all the instruction for your program)\n"
 
 # link our .o files to make an executable
-Stack: Stack.o
-	$(COMPILER) $(C_FLAGS) -o Stack Stack.o 
+LinkedList: LinkedList.o
+	$(COMPILER) $(C_FLAGS) -o LinkedList LinkedList.o 
 
-# compile the `Stack.o` file
-Stack.o: Stack.c
+# compile the `LinkedList.o` file
+LinkedList.o: LinkedList.c
 	$(COMPILER) $(C_FLAGS) -c Stack.c
 
 ##################################################################
