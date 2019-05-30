@@ -1,102 +1,40 @@
 
-# compile with gcc, change this to clang if you prefer
 COMPILER = gcc
 
-# The C flags to pass to gcc
 C_FLAGS = -Wall -Wextra
 
-# prepend the command with '@' so that Make does not print the command before running it 
 help:
 	@printf "available command:\n"
 	@printf "	make help               (this command)\n"
 	@printf "	make Stack              (to build your C program)\n"
 	@printf "	make test               (to run every test case)\n"
-	@printf "	make exit_test          (to run test cases against the exit instruction for your program)\n"
-	@printf "	make push_test          (to run test cases against the push instruction for your program)\n"
-	@printf "	make peek_test          (to run test cases against the peek instruction for your program)\n"
-	@printf "	make pop_test           (to run test cases against the pop instruction for your program)\n"
-	@printf "	make compound_test      (to run test cases against all the instruction for your program)\n"
+	@printf "	make test1          	(to run test cases 1 for your program)\n"
+	@printf "	make test2         	(to run test cases 2 for your program)\n"
+	@printf "	make test3         	(to run test cases 3 for your program)\n"
 
-# link our .o files to make an executable
+# link .o files to make an executable
 LinkedList: LinkedList.o
 	$(COMPILER) $(C_FLAGS) -o LinkedList LinkedList.o 
 
 # compile the `LinkedList.o` file
 LinkedList.o: LinkedList.c
-	$(COMPILER) $(C_FLAGS) -c Stack.c
+	$(COMPILER) $(C_FLAGS) -c LinkedList.c
 
 ##################################################################
 # Test Cases
-test: exit_test push_test peek_test pop_test compound_test
+test: test1 test2 test3
 
 ##############################
-# exit test cases
-exit_test: exit_test1
-
 # run our executable by passing in the text file via stdin with `<` and passing stdout to a file with `>`
 # then use a scrit to verify that the result are the same one as the one expected
-exit_test1: Stack
-	./Stack < Data/exit_test1.input > exit_test1.result
-	./TestPassed.sh exit_test1.result Data/exit_test1.expected
+test1: LinkedList
+	./LinkedList < Data/test1.input > test1.result
 
 ##############################
-# push test cases
-push_test: push_test1 push_test2
-
-push_test1: Stack
-	./Stack < Data/push_test1.input > push_test1.result
-	./TestPassed.sh push_test1.result Data/push_test1.expected 
-
-push_test2: Stack
-	./Stack < Data/push_test2.input > push_test2.result
-	./TestPassed.sh push_test2.result Data/push_test2.expected
+test2: LinkedList
+	./LinkedList < Data/test2.input > test2.result
 
 ##############################
-# peek test cases
-peek_test: peek_test1 peek_test2
-
-peek_test1: Stack
-	./Stack < Data/peek_test1.input > peek_test1.result
-	./TestPassed.sh peek_test1.result Data/peek_test1.expected
-
-peek_test2: Stack
-	./Stack < Data/peek_test2.input > peek_test2.result
-	./TestPassed.sh peek_test2.result Data/peek_test2.expected
-
-##############################
-# pop test cases
-pop_test: pop_test1 pop_test2 pop_test3
-
-pop_test1: Stack
-	./Stack < Data/pop_test1.input > pop_test1.result
-	./TestPassed.sh pop_test1.result Data/pop_test1.expected
-
-pop_test2: Stack
-	./Stack < Data/pop_test2.input > pop_test2.result
-	./TestPassed.sh pop_test2.result Data/pop_test2.expected
-
-pop_test3: Stack
-	./Stack < Data/pop_test3.input > pop_test3.result
-	./TestPassed.sh pop_test3.result Data/pop_test3.expected
-
-##############################
-# compound test cases
-compound_test: compound_test1 compound_test2 compound_test3
-
-compound_test1: Stack
-	./Stack < Data/compound_test1.input > compound_test1.result
-	./TestPassed.sh compound_test1.result Data/compound_test1.expected
-
-compound_test2: Stack
-	./Stack < Data/compound_test2.input > compound_test2.result
-	./TestPassed.sh compound_test2.result Data/compound_test2.expected
-
-compound_test3: Stack
-	./Stack < Data/compound_test3.input > compound_test3.result
-	./TestPassed.sh compound_test3.result Data/compound_test3.expected
-
-##############################
-#  New Test Case
-NewTest: Stack
-	./Stack<Data/NewTest.input>NewTest.expected
-	./TestPassed.sh NewTest.expected Data/NewTest.expected
+test3: LinkedList
+	./LinkedList < Data/test3.input > test3.result
+	#./TestPassed.sh test3.result Data/test3.expected
