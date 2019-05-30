@@ -24,17 +24,15 @@ LinkedList.o: LinkedList.c
 # Test Cases
 test: test1 test2 test3
 
-##############################
+
 # run our executable by passing in the text file via stdin with `<` and passing stdout to a file with `>`
 # then use a scrit to verify that the result are the same one as the one expected
 test1: LinkedList
 	./LinkedList < Data/test1.input > test1.result
 
-##############################
 test2: LinkedList
 	./LinkedList < Data/test2.input > test2.result
 
-##############################
 test3: LinkedList
 	./LinkedList < Data/test3.input > test3.result
-	#./TestPassed.sh test3.result Data/test3.expected
+

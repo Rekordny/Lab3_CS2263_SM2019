@@ -39,12 +39,13 @@ int main(void)
     {
         push(&Stack, buffer);
     }
-
+    
     // write out the sentence in reverse order
     while(Stack != NULL)
     {
         char *str = malloc(sizeof(char));
         bool popped = pop(&Stack, &str);
+        
         if( popped && NULL != str )
         {
             printf("%s ", str);
@@ -67,14 +68,12 @@ int main(void)
  */
 Node_t *newNode(const char *value, Node_t *next)
 {
-    Node *nd = malloc(sizeof(Node));
-    char *val;
+    char *val = malloc(sizeof(char));
+    Node_t *nd = malloc(sizeof(Node_t));
     strcpy(val, value);
     nd -> value = val;
     nd -> next = next;
-    if(nd == null){
-        return NULL;
-    }
+    return nd;
 }
 
 /**
@@ -85,13 +84,13 @@ Node_t *newNode(const char *value, Node_t *next)
 Node_t *deleteNode(Node_t *current, char **value)
 {
     Node_t *ptr = current;
-    if((ptr->value == *value)&&(strcmp((ptr->value),*value) == 0)){
+    *value = ptr->value;
+    if((current->value == *value) && (strcmp(current->value, *value) == 0))
+    {
         free(current);
         return ptr->next;
-    }else{
-        return NULL;
     }
-    
+    return NULL;
 }
 
 /**
@@ -102,12 +101,16 @@ Node_t *deleteNode(Node_t *current, char **value)
  */
 bool pop(Node_t **Stack, char **value)
 {
-    if(*Stcak == NULL){
+    if(*Stack == NULL)
+    {
         return false;
-    }else{
+    }
+    else
+    {
         *Stack = deleteNode(*Stack, value);
         return true;
     }
+    return false;
 }
 
 /**
@@ -116,17 +119,22 @@ bool pop(Node_t **Stack, char **value)
  * return true if everything is successfull
  */
 bool push(Node_t **Stack, const char *value)
-{   
-    if(*Stack == NULL){
+
+{
+    if(*Stack == NULL)
+    {
         char *val = malloc(sizeof(char));
         strcpy(val, value);
         *Stack = newNode(val, NULL);
         return true;
-    }else{
+    }
+    else
+    {
         char *val = malloc(sizeof(char));
         strcpy(val, value);
         Node_t *p = newNode(val, *Stack);
         *Stack = p;
         return true;
     }
+    return false;
 }
