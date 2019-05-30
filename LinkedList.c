@@ -43,7 +43,7 @@ int main(void)
     // write out the sentence in reverse order
     while(Stack != NULL)
     {
-        char *str = NULL;
+        char *str = malloc(sizeof(char));
         bool popped = pop(&Stack, &str);
         if( popped && NULL != str )
         {
@@ -118,12 +118,12 @@ bool pop(Node_t **Stack, char **value)
 bool push(Node_t **Stack, const char *value)
 {   
     if(*Stack == NULL){
-        char *val = NULL;
+        char *val = malloc(sizeof(char));
         strcpy(val, value);
         *Stack = newNode(val, NULL);
         return true;
     }else{
-        char *val = NULL;
+        char *val = malloc(sizeof(char));
         strcpy(val, value);
         Node_t *p = newNode(val, *Stack);
         *Stack = p;
