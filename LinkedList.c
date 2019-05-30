@@ -84,7 +84,7 @@ Node_t *newNode(const char *value, Node_t *next)
  */
 Node_t *deleteNode(Node_t *current, char **value)
 {
-    Node *ptr = current;
+    Node_t *ptr = current;
     if((ptr->value == *value)&&(strcmp((ptr->value),*value) == 0)){
         free(current);
         return ptr->next;
@@ -105,8 +105,7 @@ bool pop(Node_t **Stack, char **value)
     if(*Stcak == NULL){
         return false;
     }else{
-        Node_t *p = *Stack;
-        p = deleteNode(*Stack, value);
+        *Stack = deleteNode(*Stack, value);
         return true;
     }
 }
@@ -119,12 +118,12 @@ bool pop(Node_t **Stack, char **value)
 bool push(Node_t **Stack, const char *value)
 {   
     if(*Stack == NULL){
-        char *val;
+        char *val = NULL;
         strcpy(val, value);
         *Stack = newNode(val, NULL);
         return true;
     }else{
-        char *val;
+        char *val = NULL;
         strcpy(val, value);
         Node_t *p = newNode(val, *Stack);
         *Stack = p;
